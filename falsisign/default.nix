@@ -8,7 +8,7 @@ with pkgs; let
     name,
     prePostFixup ? "",
   }: let
-    fixedPath = "${lib.makeBinPath ([coreutils file ghostscript imagemagick] ++ lib.optionals (name == "falsisign") [pdftk])}";
+    fixedPath = "${lib.makeBinPath ([coreutils file ghostscript imagemagick poppler_utils] ++ lib.optionals (name == "falsisign") [pdftk])}";
   in
     stdenv.mkDerivation {
       pname = name;
@@ -16,7 +16,7 @@ with pkgs; let
 
       nativeBuildInputs = [makeWrapper];
 
-      buildInputs = [coreutils file ghostscript pdftk imagemagick];
+      buildInputs = [coreutils file ghostscript pdftk imagemagick poppler_utils];
 
       src = falsisign-src;
 
